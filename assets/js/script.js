@@ -56,8 +56,8 @@ function startTimer () {
 function startQuiz() {
     questionBox.innerHTML = "";
     answerBox.innerHTML = "";
-    var currentQuestion = questions[scoreVariable]
-    var h2 = document.createElement("h2")
+    var currentQuestion = questions[scoreVariable];
+    var h2 = document.createElement("h2");
     h2.textContent = currentQuestion.q;
     questionBox.append(h2);
 
@@ -71,13 +71,13 @@ function startQuiz() {
 }
 
 function endQuiz() {
-    // add show attribute
     clearInterval(timer);
-    endScreen.setAttribute("class", "show")
     localStorage.setItem("initials", document.querySelector("#initials-field").value)
     document.querySelector("#initials-field").value
     localStorage.getItem("initials")
-    scoreBox.textContent = timeBox;
+    //scoreBox.textContent = timer;
+    scoreBox.append(timer);
+    endScreen.setAttribute("class", "show")
    }
 
 function checkAnswer () {
@@ -90,9 +90,8 @@ function checkAnswer () {
         time = time - 10;
     }
     scoreVariable++; 
-    startQuiz ();
+    //startQuiz ();
     if (scoreVariable === questions.length) {
-        console.log("end quiz") 
         //call end endQuiz function ()
         endQuiz();
     } else {
