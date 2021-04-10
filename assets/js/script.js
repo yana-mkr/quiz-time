@@ -3,16 +3,11 @@ var initialScreen = document.querySelector("#initial-screen");
 var questionBox = document.querySelector("#question-box");
 var answerBox = document.querySelector("#answer-box");
 var feedbackBox = document.querySelector("#feedback-box");
+var endScreen = document.querySelector("#end-screen");
 var scoreVariable = 0;
 var time = 75;
 var timeBox = document.querySelector("#timer");
-
-startButton.addEventListener("click", function() {
-    startButton.setAttribute("class", "hide");
-    initialScreen.setAttribute("class", "hide");
-    questionBox.setAttribute("class", "show");
-    answerBox.setAttribute("class", "show");
-})
+var scoreBox = document.querySelector("#score-box");
 
 var questions = [
 {   q: "_____ JavaScript is also called client-side JavaScript",
@@ -57,14 +52,13 @@ function startTimer () {
     timerId = setInterval(timer, 1000)
     timeBox.textContent = time
 }
-startTimer();
 
 function startQuiz() {
     questionBox.innerHTML = "";
     answerBox.innerHTML = "";
     var currentQuestion = questions[scoreVariable]
     var h2 = document.createElement("h2")
-    h2.textContent = currentQuestion.q
+    h2.textContent = currentQuestion.q;
     questionBox.append(h2);
 
     for (var i = 0; i < questions[scoreVariable].c.length; i++) {
@@ -76,6 +70,16 @@ function startQuiz() {
     }    
 }
 
+function endQuiz() {
+    // add show attribute
+    clearInterval(timer);
+    endScreen.setAttribute("class", "show")
+    localStorage.setItem("initials", document.querySelector("#initials-field").value)
+    document.querySelector("#initials-field").value
+    localStorage.getItem("initials")
+    scoreBox.textContent = timeBox;
+   }
+
 function checkAnswer () {
     if (this.value === questions[scoreVariable].a)
     { 
@@ -83,13 +87,14 @@ function checkAnswer () {
         //set time out to get it to disappear (optional)
     } else {
         feedbackBox.textContent = "Incorrect..."
-        // subtract time based on incorrect answer
+        time = time - 10;
     }
     scoreVariable++; 
     startQuiz ();
     if (scoreVariable === questions.length) {
         console.log("end quiz") 
         //call end endQuiz function ()
+        endQuiz();
     } else {
         startQuiz ();
     }
@@ -100,19 +105,18 @@ function timer () {
     timeBox.textContent = time
     if ( time <= 0) {
         //call end quiz function
+        endQuiz();
     }
-
 }
 
-function endQuiz() {
+startButton.addEventListener("click", function() {
+    startButton.setAttribute("class", "hide");
+    initialScreen.setAttribute("class", "hide");
+    questionBox.setAttribute("class", "show");
+    answerBox.setAttribute("class", "show");
+    startTimer();
+})
 
-}
+document.querySelector("#initials").addEventListener("click", endQuiz)
 
 startButton.onclick = startQuiz();
-
-// NEED
-// displayQuestion()
-// startTimer()
-// Give Feedback
-// Iterate scoreVariable
-// call displayQuestion()
