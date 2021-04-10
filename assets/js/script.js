@@ -71,14 +71,13 @@ function startQuiz() {
 }
 
 function endQuiz() {
-    clearInterval(timer);
+    clearInterval(timerId);
     localStorage.setItem("initials", document.querySelector("#initials-field").value)
     document.querySelector("#initials-field").value
-    localStorage.getItem("initials")
-    //scoreBox.textContent = timer;
-    scoreBox.append(timer);
+    var savedInitials = localStorage.getItem("initials")
+    scoreBox.textContent = savedInitials + " " + time;
     endScreen.setAttribute("class", "show")
-   }
+}
 
 function checkAnswer () {
     if (this.value === questions[scoreVariable].a)
