@@ -11,10 +11,12 @@ var scoreBox = document.querySelector("#score-box");
 var initialsField = document.querySelector("#initials-field");
 var submitButton = document.querySelector("#initials");
 var finalScreen = document.querySelector("#final-screen");
-var highScore = document.querySelector("#score-initials");
+var highScore = document.querySelector("#initials-field");
 var againButton = document.querySelector("#again");
+var scoreInitials = document.querySelector("#score-initials");
+var list = document.querySelector("#list");
 
-var results = ["highScore", "time"]
+var results = [];
 
 var questions = [
 {   q: "_____ JavaScript is also called client-side JavaScript",
@@ -126,15 +128,22 @@ startButton.addEventListener("click", function() {
 })
 
 submitButton.addEventListener("click", function() {
-    var list = JSON.parse(localStorage.getItem("results")) || [];
-    localStorage.setItem("results", JSON.stringify(list));
+    var initials = highScore.value;
+    var score = {initials: initials, time: time}
+    results = JSON.parse(localStorage.getItem("results")) || [];
+    results.push(score);
+    localStorage.setItem("results", JSON.stringify(results));
+console.log(results)
+    for (var i = 0; i < results.length; i++) {
+        var item = document.createElement("li");
+        item.textContent = results[i].initials + " " + results[i].time;
+        list.appendChild(item)
+        //list.textContent = initials + " " + time;
+    }
 
-    // localStorage.setItem("initials", document.querySelector("#initials-field").value)
-    // var savedInitials = localStorage.getItem("initials")
-    // highScore.append(savedInitials + " " + time);
+
     endScreen.setAttribute("class", "hide")
     finalScreen.setAttribute("class", "show")
 } )
 
-againButton.onclick = startQuiz();
 startButton.onclick = startQuiz();
