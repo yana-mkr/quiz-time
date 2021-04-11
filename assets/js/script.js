@@ -14,6 +14,8 @@ var finalScreen = document.querySelector("#final-screen");
 var highScore = document.querySelector("#score-initials");
 var againButton = document.querySelector("#again");
 
+var results = ["highScore", "time"]
+
 var questions = [
 {   q: "_____ JavaScript is also called client-side JavaScript",
         c: ["Microsoft",
@@ -56,7 +58,7 @@ var timerId;
 
 function startTimer () {
     timerId = setInterval(timer, 1000)
-    timeBox.textContent = time
+    timeBox.textContent = "Time Left: " + time
 }
 
 function startQuiz() {
@@ -108,7 +110,7 @@ function checkAnswer () {
 
 function timer () {
     time--;
-    timeBox.textContent = time
+    timeBox.textContent = "Time Left: " + time
     if ( time <= 0) {
         //call end quiz function
         endQuiz();
@@ -124,9 +126,12 @@ startButton.addEventListener("click", function() {
 })
 
 submitButton.addEventListener("click", function() {
-    localStorage.setItem("initials", document.querySelector("#initials-field").value)
-    var savedInitials = localStorage.getItem("initials")
-    highScore.append(savedInitials + " " + time);
+    var list = JSON.parse(localStorage.getItem("results")) || [];
+    localStorage.setItem("results", JSON.stringify(list));
+
+    // localStorage.setItem("initials", document.querySelector("#initials-field").value)
+    // var savedInitials = localStorage.getItem("initials")
+    // highScore.append(savedInitials + " " + time);
     endScreen.setAttribute("class", "hide")
     finalScreen.setAttribute("class", "show")
 } )

@@ -1,6 +1,69 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .hide {
     display: none;
 }
 .show {
     display: visible;
+}
+
+#initial-screen, #final-screen, #end-screen {
+    padding: 100px;
+    margin: 100px;
+    border: 5px dotted aquamarine;
+    text-align: center;
+}
+
+#question-box {
+    padding: 100px;
+    margin: 100px;
+    text-align: center;
+}
+
+#answer-box {
+    text-align: center;
+    
+}
+
+#feedback-box {
+    text-align: center;
+    color:cadetblue;
+    font-size: 30px;
+    margin: 40px;
+
+}
+.button {
+    background-color: aquamarine;
+    border-radius: 50%;
+    border: 3px dotted black;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 50px;
+    text-align: center;
+
+}
+
+#timer {
+    padding: 60px;
+    font-size: 20px;
+    color: cadetblue;
+}
+
+h1 {
+    font-size: 70px;
+    border-bottom: 2px solid aquamarine
+}
+
+h2 {
+    padding: 30px;
+    
 }
