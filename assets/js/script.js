@@ -12,7 +12,6 @@ var initialsField = document.querySelector("#initials-field");
 var submitButton = document.querySelector("#initials");
 var finalScreen = document.querySelector("#final-screen");
 var highScore = document.querySelector("#initials-field");
-var againButton = document.querySelector("#again");
 var scoreInitials = document.querySelector("#score-initials");
 var list = document.querySelector("#list");
 
@@ -80,7 +79,6 @@ function startQuiz() {
         answerBox.append(cButtonEl);
     }    
 }
-
 function endQuiz() {
     clearInterval(timerId);
     document.querySelector("#initials-field").value
@@ -102,7 +100,7 @@ function checkAnswer () {
         time = time - 10;
     }
     scoreVariable++; 
-    //startQuiz ();
+
     if (scoreVariable === questions.length) {
         //call end endQuiz function ()
         endQuiz();
@@ -140,9 +138,7 @@ console.log(results)
         item.textContent = results[i].initials + " " + results[i].time;
         list.appendChild(item)
         list.setAttribute("class", "list")
-        //list.textContent = initials + " " + time;
     }
-
 
     endScreen.setAttribute("class", "hide")
     finalScreen.setAttribute("class", "show")
