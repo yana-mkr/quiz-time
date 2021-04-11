@@ -12,6 +12,7 @@ var initialsField = document.querySelector("#initials-field");
 var submitButton = document.querySelector("#initials");
 var finalScreen = document.querySelector("#final-screen");
 var highScore = document.querySelector("#score-initials");
+var againButton = document.querySelector("#again");
 
 var questions = [
 {   q: "_____ JavaScript is also called client-side JavaScript",
@@ -50,6 +51,7 @@ var questions = [
     a: "Ampersand, semicolon"
 }
 ]
+//making timerId a global var
 var timerId;
 
 function startTimer () {
@@ -76,8 +78,6 @@ function startQuiz() {
 
 function endQuiz() {
     clearInterval(timerId);
-    
-    localStorage.setItem("initials", document.querySelector("#initials-field").value)
     document.querySelector("#initials-field").value
     scoreBox.textContent = ("Your final score is" + " " + time);
     endScreen.setAttribute("class", "show")
@@ -124,12 +124,12 @@ startButton.addEventListener("click", function() {
 })
 
 submitButton.addEventListener("click", function() {
+    localStorage.setItem("initials", document.querySelector("#initials-field").value)
     var savedInitials = localStorage.getItem("initials")
     highScore.append(savedInitials + " " + time);
     endScreen.setAttribute("class", "hide")
     finalScreen.setAttribute("class", "show")
 } )
 
-document.querySelector("#initials").addEventListener("click", endQuiz)
-
+againButton.onclick = startQuiz();
 startButton.onclick = startQuiz();
