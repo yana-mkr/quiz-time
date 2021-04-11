@@ -8,6 +8,10 @@ var scoreVariable = 0;
 var time = 75;
 var timeBox = document.querySelector("#timer");
 var scoreBox = document.querySelector("#score-box");
+var initialsField = document.querySelector("#initials-field");
+var submitButton = document.querySelector("#initials");
+var finalScreen = document.querySelector("#final-screen");
+var highScore = document.querySelector("#score-initials");
 
 var questions = [
 {   q: "_____ JavaScript is also called client-side JavaScript",
@@ -72,12 +76,16 @@ function startQuiz() {
 
 function endQuiz() {
     clearInterval(timerId);
+    
     localStorage.setItem("initials", document.querySelector("#initials-field").value)
     document.querySelector("#initials-field").value
-    var savedInitials = localStorage.getItem("initials")
-    scoreBox.textContent = savedInitials + " " + time;
+    scoreBox.textContent = ("Your final score is" + " " + time);
     endScreen.setAttribute("class", "show")
-}
+    questionBox.setAttribute("class", "hide");
+    answerBox.setAttribute("class", "hide");
+    feedbackBox.setAttribute("class", "hide");
+    timeBox.setAttribute("class", "hide");
+    }
 
 function checkAnswer () {
     if (this.value === questions[scoreVariable].a)
@@ -114,6 +122,13 @@ startButton.addEventListener("click", function() {
     answerBox.setAttribute("class", "show");
     startTimer();
 })
+
+submitButton.addEventListener("click", function() {
+    var savedInitials = localStorage.getItem("initials")
+    highScore.append(savedInitials + " " + time);
+    endScreen.setAttribute("class", "hide")
+    finalScreen.setAttribute("class", "show")
+} )
 
 document.querySelector("#initials").addEventListener("click", endQuiz)
 
