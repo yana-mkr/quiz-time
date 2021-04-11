@@ -75,6 +75,7 @@ function startQuiz() {
         var cButtonEl = document.createElement("button");
         cButtonEl.textContent = questions[scoreVariable].c[i];
         cButtonEl.setAttribute ("value", questions[scoreVariable].c[i])
+        cButtonEl.setAttribute ("class", "btn")
         cButtonEl.onclick = checkAnswer;
         answerBox.append(cButtonEl);
     }    
@@ -138,6 +139,7 @@ console.log(results)
         var item = document.createElement("li");
         item.textContent = results[i].initials + " " + results[i].time;
         list.appendChild(item)
+        list.setAttribute("class", "list")
         //list.textContent = initials + " " + time;
     }
 
